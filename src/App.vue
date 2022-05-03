@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const config = ref(["","","","","","",""])
-
+const doubleHeight = computed(()=>{
+  return config.value.find((item)=> ["2switches", "2stacked2uswitches", "vertical2uswitch"].includes(item)) !== undefined
+})
 </script>
 
 <template>
 
-  <div class="flex justify-center items-center w-full h-30 mt-3">
+  <div class="flex justify-center items-center w-full h-32 mt-3">
     <div v-for="slot in config" >
-      <img :src="`/images/${slot}.png`" class="h-32" alt="" >
+      <img v-if="slot !== ''" :src="`images/${slot}${doubleHeight?'':'-1'}.png`" class="h-32" alt="" >
     </div>
   </div>
   <div class="mx-auto w-2/5 mt-2">
